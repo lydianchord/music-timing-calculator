@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Timing Calculator</title>
+    <link rel="stylesheet" href="assets/style.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="column vertical-line">
+        <form autocomplete="off" id="input-form">
+          <label>
+            Tempo (beats per min)
+            <input type="number" min="1" step="any" id="tempo">
+          </label>
+          <label>
+            Beats per measure
+            <input type="number" min="0" step="any" id="beats">
+          </label>
+          <label>
+            Number of measures
+            <input type="number" min="0" step="any" id="measures">
+          </label>
+          <label>
+            Decimal places (optional)
+            <input type="number" min="0" max="20" id="num-digits">
+          </label>
+          <div class="input-row">
+            <input type="submit" value="Calculate" id="calculate">
+            <input type="button" value="Reset" id="reset">
+          </div>
+        </form>
+      </div>
+      <div class="column">
+        <label>
+          One beat
+          <input type="text" disabled="disabled" id="one-beat">
+        </label>
+        <label>
+          One measure
+          <input type="text" disabled="disabled" id="one-measure">
+        </label>
+        <label>
+          Song length
+          <input type="text" disabled="disabled" class="reduced-margin" id="song-length">
+        </label>
+        <input type="text" disabled="disabled" id="song-length-min">
+        <noscript>
+          <p><strong>Please enable JavaScript</strong></p>
+        </noscript>
+      </div>
+    </div>
+    <script src="assets/timing-calculator.js"></script>
+  </body>
+</html>

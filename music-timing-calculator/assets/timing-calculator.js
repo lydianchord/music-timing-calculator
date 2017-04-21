@@ -42,24 +42,24 @@
   }
   
   
-  function formatSec(seconds, numDigits) {
-    return roundToFixed(seconds, numDigits) + " sec";
-  }
-  
-  
-  function formatMin(minSecArray, numDigits) {
-    var minutes = roundToFixed(minSecArray[0], 0);
-    var seconds = roundToFixed(minSecArray[1], numDigits);
-    return minutes + " min " + seconds + " sec";
+  function formatTime(time, numDigits) {
+    if (typeof time === "number") {
+      return roundToFixed(time, numDigits) + " sec";
+    } else {
+      var minutes = roundToFixed(time[0], 0);
+      var seconds = roundToFixed(time[1], numDigits);
+      return minutes + " min " + seconds + " sec";
+    }
   }
   
   
   function formatResult(result, numDigits) {
     var newResult = {};
-    newResult.oneBeat = formatSec(result.oneBeat, numDigits);
-    newResult.oneMeasure = formatSec(result.oneMeasure, numDigits);
-    newResult.songLength = formatSec(result.songLength, numDigits);
-    newResult.songLengthMin = formatMin(result.songLengthMin, numDigits);
+    for (var key in result) {
+      if (result.hasOwnProperty(key)) {
+        newResult[key] = formatTime(result[key], numDigits);
+      }
+    }
     return newResult;
   }
   

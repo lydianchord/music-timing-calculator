@@ -21,11 +21,9 @@ class TimingCalculatorTests(unittest.TestCase):
     def tearDown(self):
         self.browser.refresh()
     
-    def send_input(self, input_dict, submit=True):
+    def send_input(self, input_dict):
         for k, v in input_dict.items():
             self.browser.find_element_by_id(k).send_keys(v)
-        if submit:
-           self.browser.find_element_by_id('calculate').click()
     
     def get_element_value(self, elem_id):
         return self.browser.find_element_by_id(elem_id).get_attribute('value')
@@ -65,8 +63,8 @@ class TimingCalculatorTests(unittest.TestCase):
         })
     
     def test_enter_key_submits(self):
-        self.send_input({'tempo': '60'}, False)
-        self.send_input({'tempo': Keys.ENTER}, False)
+        self.send_input({'tempo': '60'})
+        self.send_input({'tempo': Keys.ENTER})
         self.assert_element_values({'one-beat': '1 sec'})
     
     def test_omitting_decimal_places_allows_mixed_precision(self):
@@ -123,14 +121,14 @@ class TimingCalculatorTests(unittest.TestCase):
         for input_id, output_id in zip(self.INPUT_IDS[:3], self.OUTPUT_IDS[:3]):
             self.send_input({input_id: '-1'})
             self.assert_element_values({output_id: '0 sec'})
-            self.send_input({input_id: Keys.BACKSPACE * 2}, False)
+            self.send_input({input_id: Keys.BACKSPACE * 2})
             self.send_input({input_id: '1'})
         self.send_input({'num-digits': '-1'})
         self.assert_element_values({'song-length-min': '1 min 0 sec'})
     
     def test_decimal_places_above_20_invalid(self):
         self.send_input({'num-digits': '21'})
-        self.assert_element_values({'one-beat': '0 sec'})
+        self.assert_element_values({'one-beat': '0.00 sec'})  # "2" seen first
     
     def test_tempo_of_0_bpm_is_invalid(self):
         self.send_input({'tempo': '0'})

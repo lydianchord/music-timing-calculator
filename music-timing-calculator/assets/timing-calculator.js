@@ -1,6 +1,8 @@
 (function () {
   "use strict";
   
+  var submitButton = document.getElementById("calculate");
+  
   var input = {
     tempo: document.getElementById("tempo"),
     beats: document.getElementById("beats"),
@@ -92,8 +94,18 @@
   }
   
   
+  function submitForm() {
+    submitButton.click();
+  }
+  
+  
   document.getElementById("input-form").addEventListener("submit", updatePage);
   document.getElementById("reset").addEventListener("click", resetPage);
+  for (var elem in input) {
+    if (input.hasOwnProperty(elem)) {
+      input[elem].addEventListener("input", submitForm);
+    }
+  }
   
   updatePage();
 })();

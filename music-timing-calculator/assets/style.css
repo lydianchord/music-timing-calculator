@@ -34,3 +34,7 @@ input {
   margin-bottom: 0;
   margin-right: 4px;
 }
+
+.invisible {
+  visibility: hidden;
+}

@@ -12,7 +12,7 @@ class TimingCalculatorTests(unittest.TestCase):
     def setUpClass(cls):
         cls.browser = webdriver.Chrome()
         current_dir = '/'.join(os.getcwd().split(os.sep))
-        cls.browser.get('file:///{}/index.html'.format(current_dir))
+        cls.browser.get('file:///{}/../index.html'.format(current_dir))
     
     @classmethod
     def tearDownClass(cls):
